@@ -11,8 +11,11 @@ const orders = require('./routes/order');
 
 connectDatabase();
 
+
+app.use(express.json())
+
 app.use('/api/v1/', products);
-app.use('/api/v1', orders);
+app.use('/api/v1/', orders);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is listening to port 8000 in ${process.env.NODE_ENV}`)
