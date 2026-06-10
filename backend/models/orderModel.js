@@ -5,8 +5,11 @@ const orderSchema = new mongoose.Schema({
     cartItems: Array,
     amount: String,
     status: String,
-    cratedAt: Date    
-})
+    },
+    {
+    timestamps: true,
+    }
+)
 
 const orderModel = mongoose.model('Order', orderSchema);
 
