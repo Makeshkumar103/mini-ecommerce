@@ -1,18 +1,20 @@
 import { Fragment } from "react/jsx-runtime";
 import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
-
+import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
 
     const [products, setProducts] = useState([]);
+    const searchParams = useSearchParams();
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_API_URL+'/products')
+        fetch(process.env.REACT_APP_API_URL+'/products?'+searchParams)
         .then(res => res.json())
         .then(res => setProducts(res.products))
-        console.log(process.env.REACT_APP_API_URL)
-    },[]) 
+
+        // console.log(process.env.REACT_APP_API_URL)
+    },[searchParams]) 
 
     return <Fragment>
       <h1 id="products_heading">Latest Products</h1>
@@ -24,8 +26,6 @@ export default function Home() {
                     product={product} 
                     key={product._id}
             />)}
-
-            
         </div>
         </section>
     </Fragment>
