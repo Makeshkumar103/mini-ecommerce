@@ -4,18 +4,22 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductDetail from './pages/ProductDetail';
+import { useState } from 'react';
 
 
 function App() {
+
+  const [cartItems, setCartItems] = useState([]); 
+
   return (
     <div className="App">
       <Router>
         <div>
-          <Header />
+          <Header cartItems ={cartItems}/>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/search' element={<Home />} />
-            <Route path='/product/:id' element={<ProductDetail />} />
+            <Route path='/product/:id' element={<ProductDetail cartItems={cartItems} setCartItems={setCartItems} />} />
 
           </Routes>
           <Footer />    

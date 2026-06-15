@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 
 
-export default function ProductDetials() {
+export default function ProductDetials({ cartItems, setCartItems }) {
 
     const [product, setProduct] = useState(null);
+    const [qty, setQty] = useState(1);
     const {id} = useParams();
 
     useEffect(() => {
@@ -15,7 +16,16 @@ export default function ProductDetials() {
             // console.log(process.env.REACT_APP_API_URL)
         },[]) 
 // })
-
+    function addtoCart() {
+        // console.log(product._id);
+        const itemExist = cartItems.find((item) => item.product._id == product._id)
+        // console.log(itemExist)
+        // console.log(product_id)
+        if (!itemExist) {
+            const newItem = {product, qty};
+            setCartItems((state) => [...state, newItem]);
+        } 
+    }
 
 return (
     product && <div className="container container-fluid">
@@ -38,12 +48,12 @@ return (
                 <div className="stockCounter d-inline">
                     <span className="btn btn-danger minus">-</span>
 
-                    <input type="number" className="form-control count d-inline" value="1" readOnly />
+                    <input type="number" className="form-control count d-inline" value={qty} readOnly />
 
                     <span className="btn btn-primary plus">+</span>
                 </div>
 
-                <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                <button type="button" onClick={addtoCart} id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
                 <hr />
 
                 <p>Status: <span id="stock_status" className={product.stock > 0  ? 'text-success' : 'text-danger'}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span></p>
