@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 export default function Home() {
 
     const [products, setProducts] = useState([]);
-    const searchParams = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         fetch(process.env.REACT_APP_API_URL+'/products?'+searchParams)
@@ -26,6 +26,7 @@ export default function Home() {
                     product={product} 
                     key={product._id}
             />)}
+            {/* {products.map( product => <ProductCard />)} */}
         </div>
         </section>
     </Fragment>

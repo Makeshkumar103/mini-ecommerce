@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function ProductCard ( {product} ) {
 
     const imgSrc = product?.images?.[0]?.image || "/images/no-image-placeholder.png";
-
+    // console.log(product.images[0].image)
     const handleImageError = (e) => {
         e.target.src = "/images/no-image-placeholder.png";
     }
@@ -20,7 +20,9 @@ export default function ProductCard ( {product} ) {
                     <div className="card-body d-flex flex-column">
                         <h5 className="card-title">
                             {/* <a href="*">OPPO F21s Pro 5G (Dawnlight Gold, 8GB RAM, 128 Storage) with No Cost EMI/Additional Exchange Offers</a> */}
-                            <a href="*">{product.name}</a>
+                            {/* <a href="*">{product.name}</a> */}
+                            <Link to={'/product/+product._id'}> {product.name}</Link>
+
                         </h5>
                         <p> {product.description}</p>
 
@@ -30,7 +32,7 @@ export default function ProductCard ( {product} ) {
                         </div>
                     </div>
                     <p className="card-text">{product.price}</p>
-                        <Link to={'/product/+product._id'} id="view_btn" className="btn btn-block">View Details</Link>
+                    <Link to={'/product/+product._id'} id="view_btn" className="btn btn-block">View Details</Link>
                     </div>
                 </div>
             </div>

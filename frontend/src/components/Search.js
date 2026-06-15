@@ -14,7 +14,8 @@ return (
           <input
             type="text"
             id="search_field"
-            onChange={(e) => setKeyword(e.target.value)}
+            onChange={ (e) => setKeyword(e.target.value)}
+            onBlur={searchHandler}
             className="form-control"
             placeholder="Enter Product Name ..."
           />
