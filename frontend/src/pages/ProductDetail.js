@@ -46,15 +46,13 @@ return (
                 <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
                 <hr />
 
-                <p>Status: <span id="stock_status">{product.stock}</span></p>
+                <p>Status: <span id="stock_status" className={product.stock > 0  ? 'text-success' : 'text-danger'}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span></p>
                 <hr />
 
                 <h4 className="mt-2">Description:</h4>
-                <p>Processor: Intel i5-1235U (3.30 GHz up to 4.40 GHz), 10 Cores & 12MB Cache
-                    RAM & Storage: 8GB, 8Gx1, DDR4, 2666MHz Ach & 512GB SSD
-                    Display & Graphics: 15.6" FHD WVA AG 120Hz 250 nits Narrow Border & Integrated Graphics</p>
+                <p>{product.description}</p>
                 <hr />
-                <p id="product_seller mb-3">Sold by: <strong>Amazon</strong></p>
+                <p id="product_seller mb-3">Sold by: <strong>{product.seller}</strong></p>
 				
                 <div className="rating w-50"></div>
 						

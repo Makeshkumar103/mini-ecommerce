@@ -20,7 +20,7 @@ exports.getProducts = async (req, res, next) => {
 
 // Get Single Product API - /api/v1/product/:id
 
-exports.getSingleProduct = async(req, res, next) => {
+exports.getSingleProduct = async (req, res, next) => {
     try {
         const product = await productModel.findById(req.params.id)
         res.json({
