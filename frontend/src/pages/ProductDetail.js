@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function ProductDetials({ cartItems, setCartItems }) {
@@ -18,13 +19,27 @@ export default function ProductDetials({ cartItems, setCartItems }) {
 // })
     function addtoCart() {
         // console.log(product._id);
-        const itemExist = cartItems.find((item) => item.product._id == product._id)
+        const itemExist = cartItems.find((item) => item.product._id === product._id)
         // console.log(itemExist)
         // console.log(product_id)
         if (!itemExist) {
             const newItem = {product, qty};
             setCartItems((state) => [...state, newItem]);
+            toast("Cart Item added successfully!")
         } 
+    }
+
+    function increaseQty () {
+        if (product.stock == qty){
+            return;
+        }
+        setQty((state) => state + 1 );
+    }
+    
+    function decreaseQty () {
+        if (qty > 0) {
+            setQty((state) => state - 1 );    
+        }
     }
 
 return (
@@ -46,17 +61,17 @@ return (
 
                 <p id="product_price">{product.price}</p>
                 <div className="stockCounter d-inline">
-                    <span className="btn btn-danger minus">-</span>
+                    <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
                     <input type="number" className="form-control count d-inline" value={qty} readOnly />
 
-                    <span className="btn btn-primary plus">+</span>
+                    <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                 </div>
 
-                <button type="button" onClick={addtoCart} id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                <button type="button" onClick={addtoCart} disabled={product.stock == 0 } id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
                 <hr />
 
-                <p>Status: <span id="stock_status" className={product.stock > 0  ? 'text-success' : 'text-danger'}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span></p>
+                        <p>Status: <span id="stock_status" className={product.stock > 0  ? 'text-success' : 'text-danger'}>{product.stock > 0 ? "In Stock" : "Out of Stock"}</span></p>
                 <hr />
 
                 <h4 className="mt-2">Description:</h4>

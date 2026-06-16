@@ -14,6 +14,9 @@ npm start
 frontend folder created 
 cd frontend
 npx create-react-app .
+npm i react-router-dom
+npm i react-toastify
+
 
 logo
 report web vitals
